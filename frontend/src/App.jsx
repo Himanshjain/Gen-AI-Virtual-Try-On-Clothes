@@ -239,11 +239,18 @@ function App() {
                           value={garmentType}
                           onChange={setGarmentType}
                         >
-                          <Option value="shirt">Shirt</Option>
-                          <Option value="pants">Pants</Option>
-                          <Option value="jacket">Jacket</Option>
-                          <Option value="dress">Dress</Option>
-                          <Option value="tshirt">T-shirt</Option>
+                          <Option value="kurta">Kurta</Option>
+                          <Option value="saree">Saree</Option>
+  <Option value="lehenga">Lehenga</Option>
+  <Option value="salwar_suit">Salwar Suit</Option>
+  <Option value="sherwani">Sherwani</Option>
+  <Option value="dhoti">Dhoti</Option>
+  <Option value="churidar">Churidar</Option>
+  <Option value="blouse">Blouse</Option>
+  <Option value="anarkali">Anarkali</Option>
+  <Option value="indo_western">Indo-Western</Option>
+  <Option value="shirt">Shirt</Option>
+  <Option value="Dress">Dress</Option>
                         </Select>
                       </div>
 

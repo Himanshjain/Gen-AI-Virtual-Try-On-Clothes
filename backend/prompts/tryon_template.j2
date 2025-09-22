@@ -1,0 +1,88 @@
+{
+  "objective": "Generate a photorealistic virtual try-on image, seamlessly integrating a specified clothing item onto a person while rigidly preserving their facial identity, the clothing's exact appearance, and placing them in a completely new, distinct background.",
+  "task": "High-Fidelity Virtual Try-On with Identity/Garment Preservation and Background Replacement",
+  "inputs": {
+    "person_image": {
+      "description": "Source image containing the target person. Used *primarily* for identity (face, skin tone), pose, body shape, hair, and accessories. The original background will be DISCARDED.",
+      "id": "input_1"
+    },
+    "garment_image": {
+      "description": "Source image containing the target clothing item. May include a model, mannequin, or be flat-lay. Used *strictly* for the clothing's visual properties (color, style, texture, pattern). The model or mannequin in this image must be ignored entirely—do not replicate their pose, body, or identity in the final output.",
+      "id": "input_2"
+    }
+  },
+  "processing_steps": [
+    "Isolate the clothing item from 'garment_image' (input_2), discarding any original model, mannequin, or background. Extract exact color, pattern, texture, and style information.",
+    "Ignore the identity, pose, and body of any model or mannequin present in 'garment_image'.",
+    "Identify the person (face, body shape, skin tone), pose, hair, and accessories from 'person_image' (input_1).",
+    "Segment the person from the original background in 'person_image'.",
+    "Determine the desired new background based on 'background_preference' or generate a suitable default.",
+    "Analyze lighting cues from 'person_image' to inform initial lighting on the subject, but adapt lighting for consistency with the *new* background."
+  ],
+  "output_requirements": {
+    "description": "Generate a single, high-resolution image where the person from 'person_image' appears to be naturally and realistically wearing the clothing item from 'garment_image', situated within a **completely new and different background**.",
+    "format": "Image (e.g., PNG, JPG)",
+    "quality": "Photorealistic, free of obvious artifacts, blending issues, or inconsistencies between subject, garment, and the new background."
+  },
+  "core_constraints": {
+    "identity_lock": {
+      "priority": "ABSOLUTE CRITICAL",
+      "instruction": "Maintain the **PERFECT** facial identity, features, skin tone, and expression of the person from 'person_image'. **ZERO alterations** to the face are permitted."
+    },
+    "garment_fidelity": {
+      "priority": "ABSOLUTE CRITICAL",
+      "instruction": "Preserve the **EXACT** color, pattern, texture, and design details of the clothing item from 'garment_image'. **ZERO deviations** allowed."
+    },
+    "background_replacement": {
+      "priority": "CRITICAL",
+      "instruction": "Generate a **COMPLETELY NEW** background distinct from the original. **NO** elements from the original background should remain."
+    },
+    "pose_preservation": {
+      "priority": "HIGH",
+      "instruction": "Retain the **exact** body pose and positioning of the person."
+    },
+    "realistic_integration": {
+      "priority": "HIGH",
+      "instruction": "Simulate physically plausible draping, folding, and fit of the garment."
+    },
+    "lighting_consistency": {
+      "priority": "HIGH",
+      "instruction": "Apply lighting and shadows consistent with the **new** background."
+    }
+  },
+  "additional_constraints": {
+    "body_proportion_accuracy": "Scale the garment accurately to the person's body proportions.",
+    "occlusion_handling": "Render natural occlusions; preserve visible unique features unless logically covered.",
+    "hair_and_accessory_integrity": "Keep hair and accessories intact unless occluded by the garment.",
+    "texture_and_detail_rendering": "Render fine details (e.g., embroidery, seams) with high fidelity.",
+    "scene_coherence": "Ensure the person fits contextually within the new environment."
+  },
+  "edge_case_handling": {
+    "tight_fitting_clothing": "Accurately depict fabric stretch on body contours.",
+    "transparent_sheer_clothing": "Realistically render transparency.",
+    "complex_garment_geometry": "Handle unusual shapes and layers.",
+    "unusual_poses": "Ensure plausible draping in dynamic poses.",
+    "garment_partially_out_of_frame": "Render only visible portions correctly.",
+    "low_resolution_inputs": "Prioritize realistic integration over invented details.",
+    "mismatched_lighting_inputs": "Adapt lighting to the new background."
+  },
+  "prohibitions": [
+    "DO NOT alter the person's facial features, identity, expression, or skin tone.",
+    "DO NOT modify the garment's intrinsic color or pattern.",
+    "DO NOT retain ANY part of the original background.",
+    "DO NOT change the person's pose.",
+    "DO NOT hallucinate missing garment sections.",
+    "DO NOT replicate or include the model or mannequin from 'garment_image' in the final output."
+  ]
+}
+
+You are a virtual fashion stylist.  
+Create a realistic try-on visualization of the uploaded clothing onto the person image.  
+Match the following context:  
+- Model Type: {{ model_type }}  
+- Gender: {{ gender }}  
+- Garment Type: {{ garment_type }}  
+- Style: {{ style }}  
+- Special Instructions: {{ instructions }}  
+
+Return image of try on and a short caption or summary of how the outfit looks and fits. Also include suggestions for improvement.
