@@ -15,6 +15,7 @@ if not GEMINI_API_KEY:
     raise ValueError("Missing GEMINI_API_KEY in .env")
 
 client = genai.Client(api_key=GEMINI_API_KEY)
+print("Using GEMINI_API_KEY:", GEMINI_API_KEY[:8], "…")
 
 @router.post("/try-on")
 async def try_on(
@@ -50,7 +51,8 @@ async def try_on(
             style=style,
             instructions=instructions,
         )
-        print("Using prompt:", prompt[:200], "…")  # log first 200 chars
+        # print("Using prompt:", prompt[:200], "…")  # log first 200 chars
+        
 
         # ---- 3. Call Gemini ----
         contents = [
