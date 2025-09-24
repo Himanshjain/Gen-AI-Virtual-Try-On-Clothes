@@ -18,7 +18,7 @@ const Footer = ({ isDarkMode }) => {
       <Text style={{ color: textColor, fontSize: 14 }}>
         Developed by{" "}
         <a
-          href="https://www.narenderkeswani.com"
+          href="https://himanshjain.website3.me/"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -27,7 +27,7 @@ const Footer = ({ isDarkMode }) => {
             fontWeight: 500,
           }}
         >
-          Narender Keswani
+          Himansh Jain
         </a>{" "}
         • All rights reserved © {new Date().getFullYear()}
       </Text>

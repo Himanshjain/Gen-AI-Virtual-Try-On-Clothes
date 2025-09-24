@@ -1,15 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-import os
+from routers.tryon import router as tryon_router
 
-# Load environment variables early
-load_dotenv()
+app = FastAPI(
+    title="Virtual Try-On API",
+    version="1.0.0",
+    docs_url="/docs",
+    openapi_url="/openapi.json",
+)
 
-from routers import tryon  # Now safe to import
-
-app = FastAPI()
-
+# Allow any origin during development; tighten in production
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,4 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(tryon.router, prefix="/api")
+# Mount the try-on router under /api
+app.include_router(tryon_router, prefix="/api")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

@@ -1,16 +1,17 @@
 # ai-virtual-try-on-clothes
 
 
-In Git Bash or PowerShell:
+GitBash
 
-cd "D:/Code/Clothes Try On/backend"
 python -m venv .venv
-
-Git Bash:
 source .venv/Scripts/activate
+pip install fastapi uvicorn jinja2 google-genai dotenv python-multipart
+python -m uvicorn main:app --reload --port 8080
 
-PowerShell
-.venv\Scripts\Activate.ps1
 
-pip install fastapi uvicorn python-dotenv google-genai
+
+
+
+python -m venv .venv
+source .venv/Scripts/activate
 python -m uvicorn main:app --reload --port 8080
